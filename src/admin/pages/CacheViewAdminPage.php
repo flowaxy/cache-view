@@ -195,9 +195,7 @@ class CacheViewAdminPage extends AdminPage
                 'unknown_count' => $unknownCount,
             ];
         } catch (Exception $e) {
-            if (function_exists('logger')) {
-                logger()->logError('CacheViewAdminPage getCacheInfo error: ' . $e->getMessage());
-            }
+            logger()->logError('CacheViewAdminPage getCacheInfo error: ' . $e->getMessage(), ['exception' => $e]);
         }
 
         return $info;
@@ -527,9 +525,7 @@ class CacheViewAdminPage extends AdminPage
             exit;
         } catch (Exception $e) {
             $this->setMessage('Помилка при очищенні кешу: ' . $e->getMessage(), 'danger');
-            if (function_exists('logger')) {
-                logger()->logError('CacheViewAdminPage clearAllCache error: ' . $e->getMessage());
-            }
+            logger()->logError('CacheViewAdminPage clearAllCache error: ' . $e->getMessage(), ['exception' => $e]);
         }
     }
 
@@ -560,9 +556,7 @@ class CacheViewAdminPage extends AdminPage
             exit;
         } catch (Exception $e) {
             $this->setMessage('Помилка при видаленні елемента кешу: ' . $e->getMessage(), 'danger');
-            if (function_exists('logger')) {
-                logger()->logError('CacheViewAdminPage clearCacheItem error: ' . $e->getMessage());
-            }
+            logger()->logError('CacheViewAdminPage clearCacheItem error: ' . $e->getMessage(), ['exception' => $e]);
         }
     }
 
@@ -667,9 +661,7 @@ class CacheViewAdminPage extends AdminPage
 
             return ['success' => true, 'data' => $formattedData];
         } catch (Exception $e) {
-            if (function_exists('logger')) {
-                logger()->logError('CacheViewAdminPage getCacheContent error: ' . $e->getMessage());
-            }
+            logger()->logError('CacheViewAdminPage getCacheContent error: ' . $e->getMessage(), ['exception' => $e]);
             return ['success' => false, 'error' => 'Помилка: ' . $e->getMessage()];
         }
     }
@@ -729,9 +721,7 @@ class CacheViewAdminPage extends AdminPage
                 'last_access' => isset($stats['last_access']) ? (int)$stats['last_access'] : null
             ];
         } catch (Exception $e) {
-            if (function_exists('logger')) {
-                logger()->logError('CacheViewAdminPage getActivityStats error: ' . $e->getMessage());
-            }
+            logger()->logError('CacheViewAdminPage getActivityStats error: ' . $e->getMessage(), ['exception' => $e]);
             return [
                 'level' => 'low', 
                 'score' => 0.0,
@@ -782,9 +772,7 @@ class CacheViewAdminPage extends AdminPage
                     'cache_auto_cleanup' => $allSettings['cache_auto_cleanup'] ?? $defaultSettings['cache_auto_cleanup'],
                 ];
             } catch (Exception $e) {
-                if (function_exists('logger')) {
-                    logger()->logError('CacheViewAdminPage getCacheSettings error: ' . $e->getMessage());
-                }
+                logger()->logError('CacheViewAdminPage getCacheSettings error: ' . $e->getMessage(), ['exception' => $e]);
             }
         }
 
@@ -866,9 +854,7 @@ class CacheViewAdminPage extends AdminPage
                 }
             }
         } catch (Exception $e) {
-            if (function_exists('logger')) {
-                logger()->logError('CacheViewAdminPage checkCacheExpiry error: ' . $e->getMessage());
-            }
+            logger()->logError('CacheViewAdminPage checkCacheExpiry error: ' . $e->getMessage(), ['exception' => $e]);
         }
 
         return $result;

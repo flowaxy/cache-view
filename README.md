@@ -1,9 +1,9 @@
 # Cache View Plugin
 
 **Version:** 1.0.0  
-**License:** Proprietary
+**License:** Proprietary  
 **Developer:** iTeffa (iteffa@flowaxy.com)  
-**Studio:** FLOWAXY 
+**Studio:** FLOWAXY  
 **Website:** https://flowaxy.com  
 
 ## Description

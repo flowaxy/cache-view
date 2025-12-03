@@ -34,6 +34,34 @@ class CacheViewPlugin extends BasePlugin
         addHook('admin_register_routes', [$this, 'registerAdminRoute'], 10, 1);
         addFilter('admin_menu', [$this, 'registerAdminMenu'], 15);
         addFilter('settings_categories', [$this, 'registerSettingsCategory'], 10);
+        
+        // Підписуємось на хуки кешу для відстеження статистики
+        addHook('cache_get', [$this, 'trackCacheAccess'], 10, 1);
+    }
+
+    /**
+     * Відстеження доступу до кешу
+     */
+    public function trackCacheAccess(string $key): void
+    {
+        try {
+            $trackerFile = $this->pluginDir . '/src/Services/CacheStatsTracker.php';
+            if (!file_exists($trackerFile)) {
+                return;
+            }
+            
+            if (!class_exists('CacheStatsTracker', false)) {
+                require_once $trackerFile;
+            }
+            
+            $cacheDir = defined('CACHE_DIR') ? CACHE_DIR : (defined('ROOT_DIR') ? ROOT_DIR . '/storage/cache' : null);
+            if ($cacheDir) {
+                $tracker = new \CacheStatsTracker($cacheDir);
+                $tracker->trackAccess(md5($key));
+            }
+        } catch (\Throwable $e) {
+            // Тихо ігноруємо помилки
+        }
     }
 
     public function registerAdminRoute($router): void

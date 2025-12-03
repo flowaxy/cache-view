@@ -3,12 +3,19 @@
  * Професійний плоский корпоративний стиль
  */
 
-/* ===== Відступи між секціями ===== */
-.cache-stats-section {
-    margin-bottom: 2rem;
+/* ===== Основний контейнер ===== */
+.cache-view-page {
+    padding-top: 1.5rem;
 }
 
-.cache-elements-section {
+/* ===== Відступи між секціями ===== */
+.cache-view-page .cache-stats-section {
+    margin-bottom: 2rem !important;
+    padding-bottom: 0.5rem;
+}
+
+.cache-view-page .cache-elements-section {
+    margin-top: 1.5rem;
     margin-bottom: 2rem;
 }
 

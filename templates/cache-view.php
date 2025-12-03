@@ -175,7 +175,7 @@ if (!empty($message)) {
         ?>
     </div>
 
-    <div class="cache-elements-section">
+    <div class="cache-elements-section" style="margin-top: 24px;">
         <div class="card border-0">
             <div class="card-body p-0">
                 <?php

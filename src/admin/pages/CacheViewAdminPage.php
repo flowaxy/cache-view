@@ -520,6 +520,7 @@ class CacheViewAdminPage extends AdminPage
                 $cache->clear();
             }
 
+            logger()->logInfo('Кеш повністю очищено (cache-view плагін)');
             $this->setMessage('Кеш успішно очищено', 'success');
             $this->redirect('cache-view');
             exit;
@@ -551,6 +552,7 @@ class CacheViewAdminPage extends AdminPage
                 $cache->delete($key);
             }
 
+            logger()->logInfo('Елемент кешу видалено', ['key' => $key]);
             $this->setMessage('Елемент кешу успішно видалено', 'success');
             $this->redirect('cache-view');
             exit;

@@ -23,7 +23,7 @@ class CacheViewAdminPage extends AdminPage
         $this->pluginDir = dirname(__DIR__, 3);
 
         // Перевірка прав доступу
-        if (! function_exists('current_user_can') || ! current_user_can('admin.cache.view')) {
+        if (! function_exists('current_user_can') || ! current_user_can('admin.access')) {
             Response::redirectStatic(UrlHelper::admin('dashboard'));
             exit;
         }
@@ -564,7 +564,7 @@ class CacheViewAdminPage extends AdminPage
     {
         $session = sessionManager();
         $userId = (int)($session->get('admin_user_id') ?? 0);
-        $hasAccess = ($userId === 1) || (function_exists('current_user_can') && current_user_can('admin.cache.clear'));
+        $hasAccess = ($userId === 1) || (function_exists('current_user_can') && current_user_can('admin.access'));
         if (!$hasAccess) $this->setMessage('У вас немає прав на очищення кешу', 'danger');
         return $hasAccess;
     }
